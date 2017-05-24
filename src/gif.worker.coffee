@@ -9,11 +9,16 @@ renderFrame = (frame) ->
     encoder.firstFrame = false
 
   encoder.setTransparent frame.transparent
+  encoder.setDispose frame.dispose
   encoder.setRepeat frame.repeat
   encoder.setDelay frame.delay
   encoder.setQuality frame.quality
+  encoder.setDither frame.dither
+  encoder.setGlobalPalette frame.globalPalette
   encoder.addFrame frame.data
   encoder.finish() if frame.last
+  if frame.globalPalette == true
+    frame.globalPalette = encoder.getGlobalPalette()
 
   stream = encoder.stream()
   frame.data = stream.pages

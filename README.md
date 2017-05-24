@@ -9,12 +9,6 @@ Uses typed arrays and web workers to render each frame in the background, it's r
 
 Works in browsers supporting: [Web Workers](http://www.w3.org/TR/workers/), [File API](http://www.w3.org/TR/FileAPI/) and [Typed Arrays](https://www.khronos.org/registry/typedarray/specs/latest/)
 
-Tested in
-  * Google Chrome
-  * Firefox 17
-  * Safari 6
-  * Internet Explorer 10
-  * Mobile Safari iOS 6
 
 ## Usage
 
@@ -26,7 +20,7 @@ var gif = new GIF({
   quality: 10
 });
 
-// add a image element
+// add an image element
 gif.addFrame(imageElement);
 
 // or a canvas element
@@ -40,6 +34,7 @@ gif.on('finished', function(blob) {
 });
 
 gif.render();
+
 ```
 
 ## Options
@@ -56,8 +51,19 @@ Options can be passed to the constructor or using the `setOptions` method.
 | width        | `null`          | output image width                                 |
 | height       | `null`          | output image height                                |
 | transparent  | `null`          | transparent hex color, `0x00FF00` = green          |
+| dither       | `false`         | dithering method, e.g. `FloydSteinberg-serpentine` |
+| debug        | `false`         | whether to print debug information to console      |
 
 If width or height is `null` image size will be deteremined by first frame added.
+
+Available dithering methods are:
+
+ * `FloydSteinberg`
+ * `FalseFloydSteinberg`
+ * `Stucki`
+ * `Atkinson`
+
+You can add `-serpentine` to use serpentine scanning, e.g. `Stucki-serpentine`.
 
 ### addFrame options
 
@@ -65,14 +71,9 @@ If width or height is `null` image size will be deteremined by first frame added
 | -------------|-----------------|----------------------------------------------------|
 | delay        | `500`           | frame delay                                        |
 | copy         | `false`         | copy the pixel data                                |
+| dispose      | `-1`            | frame disposal code. See [GIF89a Spec][gif89aspec] |
 
-## Wishlist
-
-If you want to contribute, here's some stuff that would be nice to have.
-
- * Tests
- * Fallbacks and polyfills for old browsers
- * Dithering!
+[gif89aspec]: https://www.w3.org/Graphics/GIF/spec-gif89a.txt
 
 ## Acknowledgements
 
@@ -81,6 +82,9 @@ gif.js is based on:
  * [Kevin Weiner's Animated gif encoder classes](http://www.fmsware.com/stuff/gif.html)
  * [Neural-Net color quantization algorithm by Anthony Dekker](http://members.ozemail.com.au/~dekker/NEUQUANT.HTML)
  * [Thibault Imbert's as3gif](https://code.google.com/p/as3gif/)
+
+Dithering code contributed by @PAEz and @panrafal
+
 
 ## License
 
