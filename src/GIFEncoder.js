@@ -379,7 +379,7 @@ GIFEncoder.prototype.findClosest = function(c, used) {
 GIFEncoder.prototype.findClosestRGB = function(r, g, b, used) {
   if (this.colorTab === null) return -1;
 
-  if (this.neuQuant && !used) {
+  if (false && this.neuQuant && !used) {
     return this.neuQuant.lookupRGB(r, g, b);
   }
 
