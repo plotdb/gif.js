@@ -1,10 +1,10 @@
 {
-  "name": "gif.js",
+  "name": "@plotdb/gif.js",
   "version": "0.2.0",
   "description": "JavaScript GIF encoding library",
-  "author": "Johan Nordberg <code@johan-nordberg.com>",
+  "author": "Johan Nordberg <code@johan-nordberg.com>, zbryikt",
   "main": "index.js",
-  "repository": "https://github.com/jnordberg/gif.js.git",
+  "repository": "https://github.com/plotdb/gif.js",
   "devDependencies": {
     "browserify": "^13.1.1",
     "coffeeify": "^2.1.0",
@@ -14,6 +14,9 @@
   "scripts": {
     "prepublish": "./bin/build"
   },
+  "files": [
+    "dist/**/*"
+  ],
   "browser": "./dist/gif.js",
   "keywords": [
     "gif",
