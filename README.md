@@ -1,3 +1,8 @@
+# @plotdb/gif.js
+
+a fork from @jnordberg/gif.js. 
+
+----
 
 # gif.js
 
