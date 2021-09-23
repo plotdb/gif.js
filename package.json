@@ -12,7 +12,7 @@
     "uglify-js": "^2.7.5"
   },
   "scripts": {
-    "prepublish": "./bin/build"
+    "build": "./bin/build"
   },
   "files": [
     "dist/**/*"
