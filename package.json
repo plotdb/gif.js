@@ -1,6 +1,6 @@
 {
   "name": "@plotdb/gif.js",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "JavaScript GIF encoding library",
   "author": "Johan Nordberg <code@johan-nordberg.com>, zbryikt",
   "main": "index.js",

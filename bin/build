@@ -8,21 +8,18 @@ if [ -d ./node_modules ]; then
   VERSION=`./bin/version`
   echo "Packaging @plotdb/gif $VERSION"
   browserify -s GIF -t coffeeify src/gif.coffee > dist/_index.js
-  uglifyjs dist/_index.js \
-    --preamble "// @plotdb/gif.js/index.js $VERSION - $URL" \
-    -m -c \
-    > dist/_index.min.js
+  uglifyjs dist/_index.js -m -c > dist/_index.min.js
   browserify -t coffeeify --bare src/gif.worker.coffee > dist/worker.js
-  uglifyjs dist/worker.js \
-    -m -c \
-    > dist/worker.min.js
-  echo -n "var GIFWORKER =\"" > dist/index.js
+  uglifyjs dist/worker.js -m -c > dist/worker.min.js
+  echo "// @plotdb/gif.js/index.js $VERSION - $URL" > dist/index.js
+  echo -n "var GIFWORKER =\"" >> dist/index.js
   cat dist/worker.min.js | tr '\n' ' ' | sed 's/"/\\"/g' >> dist/index.js
-  echo -n "\";" >> dist/index.js
+  echo "\";" >> dist/index.js
   cat dist/_index.js >> dist/index.js
-  echo -n "var GIFWORKER =\"" > dist/index.min.js
+  echo "// @plotdb/gif.js/index.js $VERSION - $URL" > dist/index.min.js
+  echo -n "var GIFWORKER =\"" >> dist/index.min.js
   cat dist/worker.min.js | tr '\n' ' ' | sed 's/"/\\"/g' >> dist/index.min.js
-  echo -n "\";" >> dist/index.min.js
+  echo "\";" >> dist/index.min.js
   cat dist/_index.min.js >> dist/index.min.js
   rm dist/_index.js dist/_index.min.js
 else
