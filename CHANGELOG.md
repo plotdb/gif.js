@@ -13,3 +13,4 @@
  - rename dist files
  - remove source map
  - inline worker script in main script file
+ - simplifying the gif generating process by skipping neuQuant if there isn't 256+ colors.
