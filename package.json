@@ -9,6 +9,7 @@
     "browserify": "^13.1.1",
     "coffeeify": "^2.1.0",
     "exorcist": "^0.4.0",
+    "fedep": "^1.1.7",
     "uglify-js": "^2.7.5"
   },
   "scripts": {
