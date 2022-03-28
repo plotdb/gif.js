@@ -233,9 +233,32 @@ GIFEncoder.prototype.writeHeader = function() {
 */
 GIFEncoder.prototype.analyzePixels = function() {
   if (!this.colorTab) {
-    this.neuQuant = new NeuQuant(this.pixels, this.sample);
-    this.neuQuant.buildColormap(); // create reduced palette
-    this.colorTab = this.neuQuant.getColormap();
+    var hash = {}, val, colors, i, c;
+    /* how many color do we have ? */
+    for(i = 0; i < this.pixels.length; i += 3) {
+      val = this.pixels[i] * 65536 + this.pixels[i + 1] * 256 + this.pixels[i + 2]
+      hash[val] = (hash[val] || 0) + 1;
+    }
+    /* we don't need neuQuant at all if we don't have >= 256 colors */
+    colors = Object.keys(hash);
+    if(colors.length < 256) {
+      this.colorTab = [];
+      for( i = 0; i < colors.length; i++ ) {
+        c = +colors[i];
+        this.colorTab.push( parseInt(c / 65536) );
+        this.colorTab.push( parseInt((c % 65536) / 256) );
+        this.colorTab.push( c % 256 );
+      }
+      for( i = colors.length; i < 256; i++ ) {
+        this.colorTab.push(255);
+        this.colorTab.push(255);
+        this.colorTab.push(255);
+      }
+    } else {
+      this.neuQuant = new NeuQuant(this.pixels, this.sample);
+      this.neuQuant.buildColormap(); // create reduced palette
+      this.colorTab = this.neuQuant.getColormap();
+    }
   }
 
   // map image pixels to new palette
