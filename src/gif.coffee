@@ -2,9 +2,9 @@
 browser = require './browser.coffee'
 
 class GIF extends EventEmitter
-
+  url = URL.createObjectURL(new Blob([GIFWORKER], {type: "application/javascript"}))
   defaults =
-    workerScript: 'gif.worker.js'
+    workerScript: url # 'gif.worker.js'
     workers: 2
     repeat: 0 # repeat forever, -1 = repeat once
     background: '#fff'
